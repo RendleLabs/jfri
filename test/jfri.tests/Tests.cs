@@ -8,7 +8,7 @@ namespace Jfri.Tests
         [Fact]
         public void Test1()
         {
-            var target = new JfriConfig();
+            var target = new Config();
         }
     }
 }

@@ -16,7 +16,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" />
-    <PackageReference Include="YamlDotNet" Version="4.0.1-pre309" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
