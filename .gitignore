@@ -252,3 +252,14 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Terraform local files
+*.tfvars
+*.tfstate*
+*.token
+extfile.cnf
+
+# Certs
+*.pem
+*.srl
+*.csr

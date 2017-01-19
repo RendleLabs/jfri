@@ -11,18 +11,44 @@ namespace Jfri
             this._config = config;
 
         }
-        public string DockerBuild => $"docker build -t {_config.ImageName} .";
+        public Command DockerBuild
+            => new Command("docker",
+                           $"build -t {_config.ImageName} .",
+                           $"Building image: {_config.ImageName}");
 
-        public string DockerTag
-            => $"docker tag {_config.ImageName} {_config.RegistryHost}/{_config.ImageName}";
+        public Command DockerTag
+            => new Command("docker",
+            $"tag {_config.ImageName} {_config.RegistryHost}/{_config.ImageName}",
+            $"Applying tag: {_config.RegistryHost}/{_config.ImageName}");
 
-        public string DockerPush
-            => $"docker push {_config.RegistryHost}/{_config.ImageName}";
+        public Command DockerPush
+            => new Command("docker",
+            $"push {_config.RegistryHost}/{_config.ImageName}",
+            $"Pushing image to {_config.RegistryHost}");
 
-        public string DockerServiceCreate
-            => $"docker service create --name {_config.ServiceName} " +
+        public Command DockerServiceCreate
+            => new Command("docker",
+            $"service create --with-registry-auth --name {_config.ServiceName} " +
                    $"--label traefik.port={_config.ContainerPort} " +
                    $"--network {_config.SwarmNetwork} " +
-                   $"{_config.RegistryHost}/{_config.ImageName}";
+                   $"{_config.RegistryHost}/{_config.ImageName}",
+            $"Creating service: {_config.ServiceName}",
+            remote: true);
+    }
+
+    public class Command
+    {
+        public Command(string file, string arguments, string output, bool remote = false)
+        {
+            File = file;
+            Arguments = arguments;
+            Output = output;
+            Remote = remote;
+        }
+
+        public string File { get; }
+        public string Arguments { get; }
+        public string Output { get; }
+        public bool Remote { get; set; }
     }
 }
